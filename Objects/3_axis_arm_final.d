@@ -1,0 +1,15 @@
+.\objects\3_axis_arm_final.o: 3_axis_arm_final.c
+.\objects\3_axis_arm_final.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\3_axis_arm_final.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\inc/hw_memmap.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\inc/hw_types.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/sysctl.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/gpio.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/debug.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/pwm.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/pin_map.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\inc/hw_gpio.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/rom.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\inc/tm4c123gh6pm.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/interrupt.h
+.\objects\3_axis_arm_final.o: ..\..\..\..\driverlib/adc.h
