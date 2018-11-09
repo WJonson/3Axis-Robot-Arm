@@ -103,16 +103,16 @@ PWMFunctionInit(volatile uint32_t* ui32PointLoad, volatile uint8_t* ui8PointAdju
 void
 ADC0Init(void)
 {
-		ROM_GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_0); //Enable PE0 for ADC function
+	ROM_GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_0); //Enable PE0 for ADC function
 	
-		ADCSequenceDisable(ADC0_BASE, 1); //disable ADC0 before the configuration is complete
-		ADCSequenceConfigure(ADC0_BASE, 1, ADC_TRIGGER_PROCESSOR, 0); // will use ADC0, SS1, processor-trigger, priority 0
-		ADCSequenceStepConfigure(ADC0_BASE, 1, 0, ADC_CTL_CH3); //ADC0 SS1 Step 0, channel 3
-		ADCSequenceStepConfigure(ADC0_BASE, 1, 1, ADC_CTL_CH3); //ADC0 SS1 Step 1, channel 3
-		ADCSequenceStepConfigure(ADC0_BASE, 1, 2, ADC_CTL_CH3); //ADC0 SS1 Step 2, channel 3
-		ADCSequenceStepConfigure(ADC0_BASE,1,3,ADC_CTL_CH3|ADC_CTL_IE|ADC_CTL_END); 
+	ADCSequenceDisable(ADC0_BASE, 1); //disable ADC0 before the configuration is complete
+	ADCSequenceConfigure(ADC0_BASE, 1, ADC_TRIGGER_PROCESSOR, 0); // will use ADC0, SS1, processor-trigger, priority 0
+	ADCSequenceStepConfigure(ADC0_BASE, 1, 0, ADC_CTL_CH3); //ADC0 SS1 Step 0, channel 3
+	ADCSequenceStepConfigure(ADC0_BASE, 1, 1, ADC_CTL_CH3); //ADC0 SS1 Step 1, channel 3
+	ADCSequenceStepConfigure(ADC0_BASE, 1, 2, ADC_CTL_CH3); //ADC0 SS1 Step 2, channel 3
+	ADCSequenceStepConfigure(ADC0_BASE,1,3,ADC_CTL_CH3|ADC_CTL_IE|ADC_CTL_END); 
 	
-		ADCSequenceEnable(ADC0_BASE, 1); //enable ADC0
+	ADCSequenceEnable(ADC0_BASE, 1); //enable ADC0
 }
 
 void
@@ -126,19 +126,19 @@ SwitchInterruptInit(void)
 	IntPrioritySet(INT_GPIOA, 0x00); //Priority 0
 	GPIO_PORTA_IM_R |= 0x9C;   		// arm interrupt on PA2, PA3, PA4, PA7
 	GPIO_PORTA_IS_R &= ~0x9C;     // PA2, PA3, PA4, PA7 are edge-sensitive
-  GPIO_PORTA_IBE_R &= ~0x9C;   	// PA2, PA3, PA4, PA7 not both edges trigger 
-  GPIO_PORTA_IEV_R &= ~0x9C;  	// PA2, PA3, PA4, PA7 falling edge event
+  	GPIO_PORTA_IBE_R &= ~0x9C;   	// PA2, PA3, PA4, PA7 not both edges trigger 
+  	GPIO_PORTA_IEV_R &= ~0x9C;  	// PA2, PA3, PA4, PA7 falling edge event
 	IntMasterEnable();        		// globally enable interrupt
 }
 
 void ADC0_Handler(void)
 {
-		ADCIntClear(ADC0_BASE, 1); //Clears interrupt flag
-		ADCProcessorTrigger(ADC0_BASE, 1); //Initiates processor trigger to begin sampling
-		ADCSequenceDataGet(ADC0_BASE, 1, ui32ADC0Value); //Samples data from PE0
-		ui32POT = (ui32ADC0Value[0] + ui32ADC0Value[1] + ui32ADC0Value[2] + ui32ADC0Value[3])/4; //Average of raw data
+	ADCIntClear(ADC0_BASE, 1); //Clears interrupt flag
+	ADCProcessorTrigger(ADC0_BASE, 1); //Initiates processor trigger to begin sampling
+	ADCSequenceDataGet(ADC0_BASE, 1, ui32ADC0Value); //Samples data from PE0
+	ui32POT = (ui32ADC0Value[0] + ui32ADC0Value[1] + ui32ADC0Value[2] + ui32ADC0Value[3])/4; //Average of raw data
 
-		ui8Adjust =  ui32POT/Scale + 50; //Sets adjust variable to scale from 50 - 100
+	ui8Adjust =  ui32POT/Scale + 50; //Sets adjust variable to scale from 50 - 100
 }
 
 //Interrupt to control servo selection
